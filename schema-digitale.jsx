@@ -188,7 +188,7 @@ export default function App() {
       const contentParts = isImage(file)
         ? [{ type: "image", source: { type: "base64", media_type: file.type, data: base64 } }, { type: "text", text: "Analizza questo schema e restituisci il JSON." }]
         : [{ type: "document", source: { type: "base64", media_type: "application/pdf", data: base64 } }, { type: "text", text: "Analizza lo schema in questo PDF e restituisci il JSON." }];
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+     const res = await fetch("/api/analyze", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 3000, system: PROMPTS[profilo], messages: [{ role: "user", content: contentParts }] })
       });
